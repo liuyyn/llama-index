@@ -1,5 +1,7 @@
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 
+# LlamaIndex uses OpenAI's gpt-3.5-turbo by default
+
 # Load data and build an index
 documents = SimpleDirectoryReader("data").load_data()  # load data from the data folder
 index = VectorStoreIndex.from_documents(
