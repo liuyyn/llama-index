@@ -2,3 +2,5 @@ llama-index
 llama-index-llms-cohere
 llama-index-embeddings-cohere
 dotenv
+requests
+Wikipedia-API
