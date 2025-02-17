@@ -4,3 +4,5 @@ llama-index-embeddings-cohere
 dotenv
 requests
 Wikipedia-API
+qdrant_client
+llama-index-vector-stores-qdrant                                                                                  
