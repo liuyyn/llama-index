@@ -6,3 +6,4 @@ requests
 Wikipedia-API
 qdrant_client
 llama-index-vector-stores-qdrant
+pydantic
