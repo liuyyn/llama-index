@@ -26,7 +26,8 @@ def get_data_from_wikipedia(city: str):
 
     wiki_page = wiki_wiki.page(city)
 
-    return wiki_page.text
+    return wiki_page
+    # return wiki_page.text
 
 
 def get_data():
