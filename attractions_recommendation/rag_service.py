@@ -7,8 +7,11 @@ from llama_index.llms.cohere import Cohere
 from llama_index.embeddings.cohere import CohereEmbedding
 from llama_index.core.output_parsers import PydanticOutputParser
 from llama_index.core.prompts import PromptTemplate
+from llama_index.core import Document
+
 
 from outputs import Attraction, Itinerary
+from get_data import get_data_from_wikipedia
 
 
 load_dotenv()
@@ -83,9 +86,30 @@ class RAGService:
 
         self.prompt_template = PromptTemplate(PROMPT_TEMPLATE)
 
-    def get_data(self):
-        """ """
-        pass
+    def insert_data_to_index(self, city: str):
+        """
+        Gets data given the city name from wikipedia and trip advisor.
+        Adds the data to the index used in the query step.
+
+        Args:
+            city (str): The city to get attractions recommendation on.
+        Returns:
+            bool: True if data is successfully inserted, False otherwise.
+        """
+        try:
+            # get data from wikipedia
+            wiki_page = get_data_from_wikipedia(city)
+            # create a Document object from the wikipedia page text
+            wiki_doc = Document(
+                text=wiki_page.text, id_=f"attractions_{wiki_page.pageid}"
+            )
+            # insert the document into the index
+            self.index.insert(wiki_doc)
+        except Exception as e:
+            print(f"Error inserting data for {city}: {e}")
+            return False
+
+        return True
 
     def query(self, city: str):
         """
